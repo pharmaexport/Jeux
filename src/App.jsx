@@ -23,10 +23,12 @@ function shuffleItems(items) {
 function App() {
   const [activeTab, setActiveTab] = useState('accueil')
   const [stamps, setStamps] = useState([])
+  const [rewardMedal, setRewardMedal] = useState(null)
   const current = TABS.find((tab) => tab.id === activeTab) ?? TABS[0]
 
   function earnStamp(id) {
     setStamps((currentStamps) => currentStamps.includes(id) ? currentStamps : [...currentStamps, id])
+    setRewardMedal({ id, label: medalLabel(STAMPS[id] ?? 'Médaille') })
   }
 
   return (
@@ -73,6 +75,22 @@ function App() {
         {activeTab === 'port' && <SimpleMission id="port" onWin={earnStamp} />}
         {activeTab === 'journal' && <FinalJournal stamps={stamps} />}
       </main>
+
+      {rewardMedal && <MedalOverlay medal={rewardMedal} onClose={() => setRewardMedal(null)} />}
+    </div>
+  )
+}
+
+function MedalOverlay({ medal, onClose }) {
+  return (
+    <div className="medal-overlay" role="dialog" aria-modal="true" aria-label="Médaille gagnée" onClick={onClose}>
+      <div className="medal-overlay-card hand-frame" onClick={(event) => event.stopPropagation()}>
+        <p className="medal-overlay-kicker">Bravo !</p>
+        <div className="giant-medal" aria-hidden="true">★</div>
+        <h3>{medal.label}</h3>
+        <p>Elle est ajoutée au carnet du petit reporter.</p>
+        <button className="primary-action" type="button" onClick={onClose}>Continuer</button>
+      </div>
     </div>
   )
 }
