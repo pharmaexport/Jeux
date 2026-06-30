@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { IMAGES, SIMPLE_GAMES, STAMPS, TABS } from './leDosRondData.js'
 
 function classNames(...names) {
