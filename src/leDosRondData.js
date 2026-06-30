@@ -45,7 +45,7 @@ export const SIMPLE_GAMES = {
     helper: 'Repère les trois allées qui partent de la véranda.',
     missions: [
       { q: 'Va vers les roses de Mamie.', a: 'allée des roses', options: ['allée du tilleul', 'allée des roses', 'allée du poulailler'] },
-      { q: 'Va voir les poules près du figuier.', a: 'allée du poulailler', options: ['allée centrale', 'allée du poulailler', 'allée de la Garonne'] },
+      { q: 'Va voir les poules près du figuier.', a: 'allée du poulailler', options: ['allée centrale', 'allée du poulailler', 'allée de la Gironde'] },
       { q: 'Va te reposer sous le grand tilleul.', a: 'allée du tilleul', options: ['allée du tilleul', 'allée des bateaux', 'allée du poêle'] }
     ]
   },
@@ -65,7 +65,7 @@ export const SIMPLE_GAMES = {
     helper: 'Guide le petit bateau entre les cabanes du port de By.',
     missions: [
       { q: 'Quelle cabane faut-il retrouver ?', a: 'la troisième', options: ['la première', 'la troisième', 'la vingtième'] },
-      { q: 'Les petites rivières se rejoignent pour aller vers...', a: 'la Garonne', options: ['la Garonne', 'la montagne', 'le potager'] },
+      { q: 'Les petites rivières se rejoignent pour aller vers...', a: 'la Gironde', options: ['la Gironde', 'la montagne', 'le potager'] },
       { q: 'Quel objet avance dans le chenal ?', a: 'le petit bateau', options: ['le petit bateau', 'la brouette', 'le poêle'] }
     ]
   }
