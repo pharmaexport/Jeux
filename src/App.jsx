@@ -9,6 +9,17 @@ function medalLabel(label) {
   return label.replace('Tampon', 'Médaille')
 }
 
+function shuffleItems(items) {
+  const shuffled = [...items]
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1))
+    const current = shuffled[index]
+    shuffled[index] = shuffled[randomIndex]
+    shuffled[randomIndex] = current
+  }
+  return shuffled
+}
+
 function App() {
   const [activeTab, setActiveTab] = useState('accueil')
   const [stamps, setStamps] = useState([])
@@ -129,17 +140,21 @@ function MissionFrame({ image, alt, helper, children }) {
 
 function SimpleMission({ id, onWin }) {
   const game = SIMPLE_GAMES[id]
+  const [missionDeck] = useState(() => game.missions.map((mission) => ({
+    ...mission,
+    options: shuffleItems(mission.options)
+  })))
   const [step, setStep] = useState(0)
   const [feedback, setFeedback] = useState('Choisis la bonne réponse.')
-  const finished = step >= game.missions.length
-  const mission = game.missions[step]
+  const finished = step >= missionDeck.length
+  const mission = missionDeck[step]
 
   function answer(choice) {
     if (finished) return
     if (choice === mission.a) {
       const next = step + 1
       setStep(next)
-      if (next === game.missions.length) {
+      if (next === missionDeck.length) {
         setFeedback('Mission réussie : médaille ajoutée au carnet !')
         onWin(id)
       } else {
@@ -215,6 +230,7 @@ function PondMission({ onWin }) {
 
 function MountainMission({ onWin }) {
   const correct = ['creuser', 'planter', 'arroser', 'attendre', 'récolter']
+  const [actionCards] = useState(() => shuffleItems(correct))
   const [order, setOrder] = useState([])
   const finished = order.join('|') === correct.join('|')
 
@@ -225,33 +241,39 @@ function MountainMission({ onWin }) {
     if (next.join('|') === correct.join('|')) onWin('montagne')
   }
 
+  function reset() {
+    setOrder([])
+  }
+
   return (
     <MissionFrame image={IMAGES.tonton || IMAGES.montagne} alt="Tonton jardine à la montagne" helper="Remets dans l’ordre les gestes de Tonton au jardin.">
-      <div className="answer-grid">{correct.map((action) => <button key={action} type="button" onClick={() => choose(action)}>{action}</button>)}</div>
+      <div className="answer-grid">{actionCards.map((action) => <button key={action} type="button" onClick={() => choose(action)}>{action}</button>)}</div>
       <ol className="order-list hand-frame">{order.map((action) => <li key={action}>{action}</li>)}</ol>
-      <button className="primary-action" type="button" onClick={() => setOrder([])}>Recommencer</button>
-      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'Le jardin de montagne est prêt.' : 'Indice : on commence par creuser.'}</p>
+      <button className="primary-action" type="button" onClick={reset}>Recommencer</button>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'Le jardin de montagne est prêt.' : 'Indice : commence par trouver le premier geste.'}</p>
     </MissionFrame>
   )
 }
 
 function ParaglidingMission({ onWin }) {
-  const letters = ['S', 'A', 'B', 'L', 'O', 'N', 'A']
+  const [letterCards] = useState(() => shuffleItems(['S', 'A', 'B', 'L', 'O', 'N', 'A'].map((letter, index) => ({
+    letter,
+    id: `${letter}-${index}`
+  }))))
   const [picked, setPicked] = useState([])
-  const finished = picked.length === letters.length
+  const finished = picked.length === letterCards.length
 
-  function collect(letter, index) {
-    const key = `${letter}-${index}`
-    if (picked.includes(key) || finished) return
-    const next = [...picked, key]
+  function collect(card) {
+    if (picked.includes(card.id) || finished) return
+    const next = [...picked, card.id]
     setPicked(next)
-    if (next.length === letters.length) onWin('parapente')
+    if (next.length === letterCards.length) onWin('parapente')
   }
 
   return (
     <MissionFrame image={IMAGES.maman} alt="Maman en parapente" helper="Attrape les lettres du mot SABLONA avec Papa et Maman.">
       <SafeImage src={IMAGES.papa} alt="Papa en parapente" />
-      <div className="answer-grid letter-grid">{letters.map((letter, index) => <button key={`${letter}-${index}`} type="button" onClick={() => collect(letter, index)}>{picked.includes(`${letter}-${index}`) ? '✓' : letter}</button>)}</div>
+      <div className="answer-grid letter-grid">{letterCards.map((card) => <button key={card.id} type="button" onClick={() => collect(card)}>{picked.includes(card.id) ? '✓' : card.letter}</button>)}</div>
       <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'SABLONA est complet dans le ciel !' : `${picked.length}/7 lettres attrapées`}</p>
     </MissionFrame>
   )
