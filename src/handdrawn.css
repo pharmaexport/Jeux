@@ -1,0 +1,63 @@
+body { font-family: 'Comic Sans MS', 'Marker Felt', 'Chalkboard SE', system-ui, sans-serif; }
+
+.site-header,
+.paper-panel,
+.intro-card,
+.game-frame,
+.mission-box,
+.story-image,
+.image-fallback,
+.helper,
+.feedback,
+.success-bubble,
+.order-list,
+.tab-button,
+.primary-action,
+.answer-grid button,
+.creature-card,
+.medal,
+.stamp {
+  border-width: 5px !important;
+  border-color: #211b16 !important;
+  border-radius: 26px !important;
+  box-shadow: 6px 7px 0 #211b16 !important;
+}
+
+h1 {
+  font-size: clamp(3.4rem, 13vw, 7rem) !important;
+  text-shadow: 4px 5px 0 #211b16 !important;
+  transform: rotate(-4deg) !important;
+}
+
+.current-game-title h2,
+.intro-card h3,
+.mission-box h3 {
+  font-size: clamp(2.1rem, 6vw, 3.4rem) !important;
+  line-height: 1.05 !important;
+}
+
+.helper {
+  font-size: clamp(1.7rem, 6vw, 2.45rem) !important;
+  line-height: 1.22 !important;
+  background: #dff3ff !important;
+}
+
+.answer-grid button {
+  min-height: 92px !important;
+  font-size: clamp(1.35rem, 5vw, 1.95rem) !important;
+}
+
+.feedback,
+.success-bubble {
+  font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+}
+
+.medal,
+.stamp {
+  min-height: 86px !important;
+  font-size: 1.22rem !important;
+}
+
+@media (max-width: 820px) {
+  .answer-grid { grid-template-columns: 1fr !important; }
+}
