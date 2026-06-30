@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import './handdrawn.css'
+import './bonus-games.css'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
