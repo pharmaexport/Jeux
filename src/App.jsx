@@ -5,6 +5,10 @@ function classNames(...names) {
   return names.filter(Boolean).join(' ')
 }
 
+function medalLabel(label) {
+  return label.replace('Tampon', 'Médaille')
+}
+
 function App() {
   const [activeTab, setActiveTab] = useState('accueil')
   const [stamps, setStamps] = useState([])
@@ -16,15 +20,15 @@ function App() {
 
   return (
     <div className="app-shell dos-rond">
-      <header className="site-header">
+      <header className="site-header hand-frame">
         <div>
           <p className="kicker">Journal officiel du Sablona</p>
           <h1>Le dos rond</h1>
           <p className="subtitle">Grand reportage du petit chien — une mission par onglet.</p>
         </div>
-        <div className="header-mascot" aria-label="Carnet de tampons">
+        <div className="header-mascot" aria-label="Carnet de médailles">
           <span>{stamps.length}/7</span>
-          <small>tampons de reportage</small>
+          <small>médailles de reportage</small>
         </div>
       </header>
 
@@ -42,7 +46,7 @@ function App() {
         ))}
       </nav>
 
-      <main className="paper-panel">
+      <main className="paper-panel hand-frame">
         <div className="current-game-title">
           <span aria-hidden="true">{current.icon}</span>
           <h2>{current.label}</h2>
@@ -65,31 +69,31 @@ function App() {
 function Home({ stamps, onPlay }) {
   return (
     <section className="home-grid">
-      <article className="intro-card">
+      <article className="intro-card hand-frame">
         <h3>Le grand reportage</h3>
         <p>
           Le petit chien prépare un nouveau numéro du journal. Il visite la ferme de Papi et Mamie,
           le potager, la mare, la montagne de Tonton, le ciel en parapente et le port de By.
         </p>
-        <p>Chaque mission réussie ajoute un tampon. Quand le carnet est complet, le journal final est prêt.</p>
+        <p>Chaque mission réussie ajoute une médaille. Quand le carnet est complet, le journal final est prêt.</p>
         <button className="primary-action" type="button" onClick={() => onPlay('ferme')}>Commencer par la ferme</button>
       </article>
-      <article className="intro-card image-card">
+      <article className="intro-card image-card hand-frame">
         <SafeImage src={IMAGES.ferme} alt="Ferme de Papi et Mamie" />
       </article>
-      <StampBook stamps={stamps} />
+      <MedalBook stamps={stamps} />
     </section>
   )
 }
 
-function StampBook({ stamps }) {
+function MedalBook({ stamps }) {
   return (
-    <article className="intro-card stamp-book-panel">
-      <h3>Carnet de tampons</h3>
-      <div className="stamp-grid">
+    <article className="intro-card medal-book-panel hand-frame">
+      <h3>Carnet de médailles</h3>
+      <div className="medal-grid">
         {Object.entries(STAMPS).map(([id, label]) => (
-          <span key={id} className={classNames('stamp', stamps.includes(id) && 'earned')}>
-            {stamps.includes(id) ? '✓ ' : '○ '}{label}
+          <span key={id} className={classNames('medal', stamps.includes(id) && 'earned')}>
+            <span aria-hidden="true">🏅</span>{stamps.includes(id) ? ' ' : ' '}{medalLabel(label)}
           </span>
         ))}
       </div>
@@ -99,17 +103,25 @@ function StampBook({ stamps }) {
 
 function SafeImage({ src, alt }) {
   const [failed, setFailed] = useState(false)
-  if (failed) return <div className="image-fallback">Image à vérifier<br /><strong>{alt}</strong></div>
-  return <img className="story-image" src={src} alt={alt} onError={() => setFailed(true)} />
+  if (failed) {
+    return (
+      <div className="image-fallback hand-frame">
+        <span className="fallback-doodle">✎</span>
+        <strong>Dessin à charger</strong>
+        <em>{alt}</em>
+      </div>
+    )
+  }
+  return <img className="story-image hand-frame" src={src} alt={alt} onError={() => setFailed(true)} />
 }
 
 function MissionFrame({ image, alt, helper, children }) {
   return (
-    <section className="game-frame story-frame">
-      <p className="helper">{helper}</p>
+    <section className="game-frame story-frame hand-frame">
+      <p className="helper hand-frame">{helper}</p>
       <div className="story-layout">
         <SafeImage src={image} alt={alt} />
-        <div className="mission-box">{children}</div>
+        <div className="mission-box hand-frame">{children}</div>
       </div>
     </section>
   )
@@ -128,7 +140,7 @@ function SimpleMission({ id, onWin }) {
       const next = step + 1
       setStep(next)
       if (next === game.missions.length) {
-        setFeedback('Mission réussie : tampon ajouté au carnet !')
+        setFeedback('Mission réussie : médaille ajoutée au carnet !')
         onWin(id)
       } else {
         setFeedback('Oui, le reportage continue.')
@@ -142,7 +154,7 @@ function SimpleMission({ id, onWin }) {
     <MissionFrame image={game.image} alt={game.alt} helper={game.helper}>
       <h3>{finished ? 'Mission terminée' : mission.q}</h3>
       {!finished && <div className="answer-grid">{mission.options.map((option) => <button key={option} type="button" onClick={() => answer(option)}>{option}</button>)}</div>}
-      <p className={finished ? 'success-bubble' : 'feedback'}>{feedback}</p>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
     </MissionFrame>
   )
 }
@@ -169,7 +181,7 @@ function GardenMission({ onWin }) {
         <button type="button" onClick={() => pick('carotte')}>🥕 Carotte {basket.carotte}/2</button>
         <button type="button" onClick={() => pick('poireau')}>🧅 Poireau {basket.poireau}/2</button>
       </div>
-      <p className={finished ? 'success-bubble' : 'feedback'}>{finished ? 'Le panier est prêt pour la soupe de Mamie !' : 'Clique les légumes pour remplir le panier.'}</p>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'Le panier est prêt pour la soupe de Mamie !' : 'Clique les légumes pour remplir le panier.'}</p>
     </MissionFrame>
   )
 }
@@ -196,7 +208,7 @@ function PondMission({ onWin }) {
       <div className="creature-grid">
         {board.map((creature, index) => <button className="creature-card" key={`${creature}-${index}-${score}-${mistakes}`} type="button" onClick={() => clickCreature(creature)}><span>{creature}</span></button>)}
       </div>
-      <p className={finished ? 'success-bubble' : 'feedback'}>{finished ? 'La grenouille est contente, le petit chien n’est pas piqué.' : `Moustiques : ${score}/5 — amis dérangés : ${mistakes}`}</p>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'La grenouille est contente, le petit chien n’est pas piqué.' : `Moustiques : ${score}/5 — amis dérangés : ${mistakes}`}</p>
     </MissionFrame>
   )
 }
@@ -216,9 +228,9 @@ function MountainMission({ onWin }) {
   return (
     <MissionFrame image={IMAGES.tonton || IMAGES.montagne} alt="Tonton jardine à la montagne" helper="Remets dans l’ordre les gestes de Tonton au jardin.">
       <div className="answer-grid">{correct.map((action) => <button key={action} type="button" onClick={() => choose(action)}>{action}</button>)}</div>
-      <ol className="order-list">{order.map((action) => <li key={action}>{action}</li>)}</ol>
+      <ol className="order-list hand-frame">{order.map((action) => <li key={action}>{action}</li>)}</ol>
       <button className="primary-action" type="button" onClick={() => setOrder([])}>Recommencer</button>
-      <p className={finished ? 'success-bubble' : 'feedback'}>{finished ? 'Le jardin de montagne est prêt.' : 'Indice : on commence par creuser.'}</p>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'Le jardin de montagne est prêt.' : 'Indice : on commence par creuser.'}</p>
     </MissionFrame>
   )
 }
@@ -240,7 +252,7 @@ function ParaglidingMission({ onWin }) {
     <MissionFrame image={IMAGES.maman} alt="Maman en parapente" helper="Attrape les lettres du mot SABLONA avec Papa et Maman.">
       <SafeImage src={IMAGES.papa} alt="Papa en parapente" />
       <div className="answer-grid letter-grid">{letters.map((letter, index) => <button key={`${letter}-${index}`} type="button" onClick={() => collect(letter, index)}>{picked.includes(`${letter}-${index}`) ? '✓' : letter}</button>)}</div>
-      <p className={finished ? 'success-bubble' : 'feedback'}>{finished ? 'SABLONA est complet dans le ciel !' : `${picked.length}/7 lettres attrapées`}</p>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{finished ? 'SABLONA est complet dans le ciel !' : `${picked.length}/7 lettres attrapées`}</p>
     </MissionFrame>
   )
 }
@@ -249,12 +261,12 @@ function FinalJournal({ stamps }) {
   const complete = stamps.length >= Object.keys(STAMPS).length
   return (
     <section className="home-grid">
-      <article className="intro-card image-card"><SafeImage src={IMAGES.chienLecture} alt="Petit chien lit le journal" /></article>
-      <article className="intro-card">
+      <article className="intro-card image-card hand-frame"><SafeImage src={IMAGES.chienLecture} alt="Petit chien lit le journal" /></article>
+      <article className="intro-card hand-frame">
         <p className="kicker">Édition spéciale</p>
         <h3>{complete ? 'Le nouveau numéro est prêt !' : 'Le journal attend encore des reportages'}</h3>
-        <p>{complete ? 'Bravo, le petit chien a terminé son grand reportage.' : `Tampons obtenus : ${stamps.length}/7.`}</p>
-        <StampBook stamps={stamps} />
+        <p>{complete ? 'Bravo, le petit chien a terminé son grand reportage.' : `Médailles obtenues : ${stamps.length}/7.`}</p>
+        <MedalBook stamps={stamps} />
       </article>
     </section>
   )
