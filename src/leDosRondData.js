@@ -1,7 +1,7 @@
 export const imagePath = (name) => `/assets/${name}`
 
 export const IMAGES = {
-  ferme: imagePath('decor-ferme-bollene-tonton-final.png'),
+  ferme: imagePath('decor-ferme-papamie-final.png'),
   potager: imagePath('scene-potager-papi-mamie.png'),
   poule: imagePath('personnage-poule-oeuf.png'),
   mare: imagePath('decor-mare-libellule-nenuphar.png'),
