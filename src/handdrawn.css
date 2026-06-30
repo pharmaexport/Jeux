@@ -14,9 +14,7 @@ body { font-family: 'Comic Sans MS', 'Marker Felt', 'Chalkboard SE', system-ui, 
 .tab-button,
 .primary-action,
 .answer-grid button,
-.creature-card,
-.medal,
-.stamp {
+.creature-card {
   border-width: 5px !important;
   border-color: #211b16 !important;
   border-radius: 26px !important;
@@ -47,17 +45,30 @@ h1 {
   font-size: clamp(1.35rem, 5vw, 1.95rem) !important;
 }
 
-.feedback,
-.success-bubble {
-  font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+.medal-grid,
+.stamp-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)) !important;
+  gap: 14px !important;
 }
 
 .medal,
 .stamp {
-  min-height: 86px !important;
-  font-size: 1.22rem !important;
+  min-height: 62px !important;
+  padding: 10px 14px !important;
+  border: 3px dashed #211b16 !important;
+  border-radius: 999px !important;
+  background: #fffdf4 !important;
+  box-shadow: none !important;
+  font-size: 1.15rem !important;
+  line-height: 1.12 !important;
+  text-align: center !important;
+  transform: none !important;
 }
 
-@media (max-width: 820px) {
-  .answer-grid { grid-template-columns: 1fr !important; }
+.medal.earned,
+.stamp.earned {
+  background: #ffe06b !important;
+  border-style: solid !important;
+  box-shadow: 3px 4px 0 #211b16 !important;
 }
