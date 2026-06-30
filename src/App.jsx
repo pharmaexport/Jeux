@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { IMAGES, SIMPLE_GAMES, STAMPS, TABS } from './leDosRondData.js'
+import {
+  DIFFERENCE_ITEMS,
+  IMAGES,
+  MEMORY_CARDS,
+  SEEK_ITEMS,
+  SIMPLE_GAMES,
+  STAMPS,
+  TABS
+} from './leDosRondData.js'
 
 function classNames(...names) {
   return names.filter(Boolean).join(' ')
@@ -25,6 +33,7 @@ function App() {
   const [stamps, setStamps] = useState([])
   const [rewardMedal, setRewardMedal] = useState(null)
   const current = TABS.find((tab) => tab.id === activeTab) ?? TABS[0]
+  const medalTarget = Object.keys(STAMPS).length
 
   function earnStamp(id) {
     setStamps((currentStamps) => currentStamps.includes(id) ? currentStamps : [...currentStamps, id])
@@ -40,7 +49,7 @@ function App() {
           <p className="subtitle">Grand reportage du petit chien — une mission par onglet.</p>
         </div>
         <div className="header-mascot" aria-label="Carnet de médailles">
-          <span>{stamps.length}/7</span>
+          <span>{stamps.length}/{medalTarget}</span>
           <small>médailles de reportage</small>
         </div>
       </header>
@@ -66,6 +75,7 @@ function App() {
         </div>
 
         {activeTab === 'accueil' && <Home stamps={stamps} onPlay={setActiveTab} />}
+        {activeTab === 'memo' && <MemoryMission onWin={earnStamp} />}
         {activeTab === 'ferme' && <SimpleMission id="ferme" onWin={earnStamp} />}
         {activeTab === 'potager' && <GardenMission onWin={earnStamp} />}
         {activeTab === 'poulailler' && <SimpleMission id="poulailler" onWin={earnStamp} />}
@@ -73,6 +83,8 @@ function App() {
         {activeTab === 'montagne' && <MountainMission onWin={earnStamp} />}
         {activeTab === 'parapente' && <ParaglidingMission onWin={earnStamp} />}
         {activeTab === 'port' && <SimpleMission id="port" onWin={earnStamp} />}
+        {activeTab === 'cachecache' && <SeekMission onWin={earnStamp} />}
+        {activeTab === 'differences' && <DifferenceMission onWin={earnStamp} />}
         {activeTab === 'journal' && <FinalJournal stamps={stamps} />}
       </main>
 
@@ -104,8 +116,15 @@ function Home({ stamps, onPlay }) {
           Le petit chien prépare un nouveau numéro du journal. Il visite la ferme de Papi et Mamie,
           le potager, la mare, la montagne de Tonton, le ciel en parapente et le port de By.
         </p>
+        <p>
+          Trois jeux bonus complètent le reportage : un mémo des personnages, un cherche et trouve
+          et un jeu des différences, avec l’humour du Dos rond.
+        </p>
         <p>Chaque mission réussie ajoute une médaille. Quand le carnet est complet, le journal final est prêt.</p>
-        <button className="primary-action" type="button" onClick={() => onPlay('ferme')}>Commencer par la ferme</button>
+        <div className="home-actions">
+          <button className="primary-action" type="button" onClick={() => onPlay('ferme')}>Commencer par la ferme</button>
+          <button className="primary-action secondary-action" type="button" onClick={() => onPlay('memo')}>Essayer le mémo</button>
+        </div>
       </article>
       <article className="intro-card image-card hand-frame">
         <SafeImage src={IMAGES.ferme} alt="Ferme de Papi et Mamie" />
@@ -187,6 +206,75 @@ function SimpleMission({ id, onWin }) {
     <MissionFrame image={game.image} alt={game.alt} helper={game.helper}>
       <h3>{finished ? 'Mission terminée' : mission.q}</h3>
       {!finished && <div className="answer-grid">{mission.options.map((option) => <button key={option} type="button" onClick={() => answer(option)}>{option}</button>)}</div>}
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
+    </MissionFrame>
+  )
+}
+
+function MemoryMission({ onWin }) {
+  const [deck] = useState(() => shuffleItems(MEMORY_CARDS.flatMap((card) => [
+    { ...card, cardId: `${card.id}-1`, pairId: card.id },
+    { ...card, cardId: `${card.id}-2`, pairId: card.id }
+  ])))
+  const [selected, setSelected] = useState([])
+  const [matched, setMatched] = useState([])
+  const [feedback, setFeedback] = useState('Retourne deux cartes pour retrouver les personnages du journal.')
+  const finished = matched.length === MEMORY_CARDS.length
+
+  function pick(card) {
+    if (finished || matched.includes(card.pairId) || selected.includes(card.cardId) || selected.length === 2) return
+
+    const nextSelected = [...selected, card.cardId]
+    setSelected(nextSelected)
+
+    if (nextSelected.length === 1) {
+      setFeedback(`${card.label} attend sa paire. Le journal retient son souffle.`)
+      return
+    }
+
+    const firstCard = deck.find((item) => item.cardId === nextSelected[0])
+    if (firstCard.pairId === card.pairId) {
+      const nextMatched = [...matched, card.pairId]
+      setMatched(nextMatched)
+      setSelected([])
+      if (nextMatched.length === MEMORY_CARDS.length) {
+        setFeedback('Toutes les paires sont retrouvées : le petit chien peut boucler son reportage !')
+        onWin('memo')
+      } else {
+        setFeedback(`${card.label} retrouvé. ${card.clue}`)
+      }
+    } else {
+      setFeedback('Patatras, ce n’est pas la paire. Même la poule a regardé de travers.')
+      window.setTimeout(() => setSelected([]), 650)
+    }
+  }
+
+  return (
+    <MissionFrame image={IMAGES.chienLecture} alt="Petit chien reporter avec son journal" helper="Retrouve les paires de personnages du Dos rond.">
+      <h3>{finished ? 'Mémo terminé' : 'Le mémo des personnages'}</h3>
+      <div className="memory-grid">
+        {deck.map((card) => {
+          const visible = selected.includes(card.cardId) || matched.includes(card.pairId)
+          return (
+            <button
+              key={card.cardId}
+              className={classNames('memory-card', visible && 'visible', matched.includes(card.pairId) && 'matched')}
+              type="button"
+              onClick={() => pick(card)}
+              aria-pressed={visible}
+            >
+              {visible ? (
+                <>
+                  <span aria-hidden="true">{card.icon}</span>
+                  <strong>{card.label}</strong>
+                </>
+              ) : (
+                <span className="memory-back" aria-hidden="true">?</span>
+              )}
+            </button>
+          )
+        })}
+      </div>
       <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
     </MissionFrame>
   )
@@ -297,6 +385,111 @@ function ParaglidingMission({ onWin }) {
   )
 }
 
+function SeekMission({ onWin }) {
+  const [items] = useState(() => shuffleItems(SEEK_ITEMS))
+  const [found, setFound] = useState([])
+  const [misses, setMisses] = useState(0)
+  const [feedback, setFeedback] = useState('Trouve les 5 objets importants du reportage. Les bêtises ne comptent pas.')
+  const targetCount = SEEK_ITEMS.filter((item) => item.target).length
+  const finished = found.length === targetCount
+
+  function spot(item) {
+    if (finished || found.includes(item.id)) return
+    if (item.target) {
+      const next = [...found, item.id]
+      setFound(next)
+      if (next.length === targetCount) {
+        setFeedback('Tout est retrouvé : Mamie peut ranger, la grenouille peut téléphoner et le journal peut paraître.')
+        onWin('cachecache')
+      } else {
+        setFeedback(`${item.label} retrouvé. Le petit chien note ça dans son carnet.`)
+      }
+    } else {
+      setMisses((value) => value + 1)
+      setFeedback('Celui-là est drôle, mais ce n’est pas dans la liste. Le lapin fait semblant de ne pas comprendre.')
+    }
+  }
+
+  return (
+    <MissionFrame image={IMAGES.tonton || IMAGES.montagne} alt="La petite maison de Tonton à la montagne" helper="Cherche les objets du journal : bois, maïs, casque, chocolat chaud et téléphone de grenouille.">
+      <h3>{finished ? 'Tout est trouvé' : 'Cherche et trouve du Sablona'}</h3>
+      <p className="game-note hand-frame">Objectifs : {found.length}/{targetCount} — fausses pistes : {misses}</p>
+      <div className="seek-grid">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            className={classNames('seek-card', found.includes(item.id) && 'found')}
+            type="button"
+            onClick={() => spot(item)}
+          >
+            <span aria-hidden="true">{item.icon}</span>
+            <strong>{item.label}</strong>
+          </button>
+        ))}
+      </div>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
+    </MissionFrame>
+  )
+}
+
+function DifferenceMission({ onWin }) {
+  const [choices] = useState(() => shuffleItems(DIFFERENCE_ITEMS))
+  const [found, setFound] = useState([])
+  const [mistakes, setMistakes] = useState(0)
+  const [feedback, setFeedback] = useState('Compare les deux scènes et clique les vraies différences.')
+  const targetCount = DIFFERENCE_ITEMS.filter((item) => item.target).length
+  const finished = found.length === targetCount
+
+  function choose(item) {
+    if (finished || found.includes(item.id)) return
+    if (item.target) {
+      const next = [...found, item.id]
+      setFound(next)
+      if (next.length === targetCount) {
+        setFeedback('Œil de reporter validé : même le rat du maïs est démasqué.')
+        onWin('differences')
+      } else {
+        setFeedback('Bien vu. Le petit chien souligne la différence dans son journal.')
+      }
+    } else {
+      setMistakes((value) => value + 1)
+      setFeedback('Non, ça c’est une invention du loup pour passer dans le journal.')
+    }
+  }
+
+  return (
+    <MissionFrame image={IMAGES.poule} alt="Poule du Sablona" helper="Trouve 5 différences entre deux scènes très sérieuses, donc forcément un peu ridicules.">
+      <h3>{finished ? 'Différences trouvées' : 'Les deux images ne racontent pas tout à fait la même bêtise'}</h3>
+      <div className="difference-scenes">
+        <div className="difference-scene hand-frame">
+          <strong>Image A</strong>
+          <p>🐶🪖 + 🪓 + 🪵 + 👵 + ☕</p>
+          <small>Le petit chien aide, Mamie surveille, personne ne coupe ses oreilles.</small>
+        </div>
+        <div className="difference-scene hand-frame">
+          <strong>Image B</strong>
+          <p>🐶 + ☎️🐸 + 🌽🐀 + 🪵 + ☕</p>
+          <small>La grenouille appelle, le rat grignote, et le casque a disparu.</small>
+        </div>
+      </div>
+      <p className="game-note hand-frame">Différences : {found.length}/{targetCount} — inventions du loup : {mistakes}</p>
+      <div className="answer-grid">
+        {choices.map((item) => (
+          <button
+            key={item.id}
+            className={classNames('difference-choice', found.includes(item.id) && 'found')}
+            type="button"
+            onClick={() => choose(item)}
+          >
+            {found.includes(item.id) ? '✓ ' : ''}{item.label}
+          </button>
+        ))}
+      </div>
+      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
+    </MissionFrame>
+  )
+}
+
 function FinalJournal({ stamps }) {
   const complete = stamps.length >= Object.keys(STAMPS).length
   return (
@@ -305,7 +498,7 @@ function FinalJournal({ stamps }) {
       <article className="intro-card hand-frame">
         <p className="kicker">Édition spéciale</p>
         <h3>{complete ? 'Le nouveau numéro est prêt !' : 'Le journal attend encore des reportages'}</h3>
-        <p>{complete ? 'Bravo, le petit chien a terminé son grand reportage.' : `Médailles obtenues : ${stamps.length}/7.`}</p>
+        <p>{complete ? 'Bravo, le petit chien a terminé son grand reportage et les trois jeux bonus.' : `Médailles obtenues : ${stamps.length}/${Object.keys(STAMPS).length}.`}</p>
         <MedalBook stamps={stamps} />
       </article>
     </section>
