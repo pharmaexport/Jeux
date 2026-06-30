@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 const CHARACTERS = [
   { id: 'chien', name: 'Petit chien', emoji: '🐶', note: 'curieux et gentil', color: '#ff8aa6' },
