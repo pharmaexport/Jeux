@@ -13,7 +13,9 @@ export const IMAGES = {
   chienLecture: imagePath('personnage-petit-chien-lecture.png'),
   chienArrose: imagePath('personnage-petit-chien-arrose-plante.png'),
   tournesol: imagePath('decor-tournesol-abeille.png'),
-  enfants: imagePath('scene-enfants-potager-style-journal.png')
+  enfants: imagePath('scene-enfants-potager-style-journal.png'),
+  differencesA: imagePath('differences_image_A_jardin_original.png'),
+  differencesB: imagePath('differences_image_B_jardin_modifie.png')
 }
 
 export const TABS = [
@@ -54,25 +56,29 @@ export const MEMORY_CARDS = [
 ]
 
 export const SEEK_ITEMS = [
-  { id: 'helmet', icon: '🪖', label: 'le casque du petit chien', target: true },
-  { id: 'axe', icon: '🪓', label: 'la grosse hache très dangereuse', target: true },
-  { id: 'maize', icon: '🌽', label: 'le maïs que les rats adorent', target: true },
-  { id: 'hot-chocolate', icon: '☕', label: 'le chocolat chaud du soir', target: true },
-  { id: 'phone-frog', icon: '☎️', label: 'le téléphone de la grenouille', target: true },
-  { id: 'sleepy-rabbit', icon: '🐰', label: 'le lapin qui creuse trop', target: false },
-  { id: 'stove', icon: '🔥', label: 'le poêle qui attend l’hiver', target: false },
-  { id: 'new-car', icon: '🚗', label: 'la nouvelle voiture de Tonton', target: false }
+  { id: 'shovel', icon: '🪴', label: 'la pelle du jardin', target: true },
+  { id: 'carrots', icon: '🥕', label: 'les carottes', target: true },
+  { id: 'leeks', icon: '🧅', label: 'les poireaux', target: true },
+  { id: 'lettuces', icon: '🥬', label: 'les salades', target: true },
+  { id: 'cap', icon: '🧢', label: 'la casquette rouge', target: true },
+  { id: 'glasses', icon: '👓', label: 'les lunettes du jardinier', target: false },
+  { id: 'sun', icon: '☀️', label: 'le soleil', target: false },
+  { id: 'house', icon: '🏠', label: 'la maison', target: false },
+  { id: 'tree', icon: '🌳', label: 'le grand arbre', target: false },
+  { id: 'fence', icon: '🪵', label: 'la clôture', target: false }
 ]
 
 export const DIFFERENCE_ITEMS = [
-  { id: 'casque', label: 'Le petit chien a oublié son casque avant de partir couper du bois.', target: true },
-  { id: 'grenouille', label: 'La grenouille téléphone depuis son nénuphar dans une image seulement.', target: true },
-  { id: 'mais', label: 'Un rat a chipé un grain de maïs de Mamie.', target: true },
-  { id: 'chocolat', label: 'Un bol de chocolat chaud a changé de couleur.', target: true },
-  { id: 'hache', label: 'La grosse hache est rangée du mauvais côté de la remorque.', target: true },
-  { id: 'papi', label: 'Papi est devenu une libellule.', target: false },
-  { id: 'gironde', label: 'La Gironde monte jusqu’à la montagne de Tonton.', target: false },
-  { id: 'journal', label: 'Le journal est imprimé à l’envers par la poule.', target: false }
+  { id: 'cap-blue', label: 'La casquette du petit chien devient bleue.', target: true },
+  { id: 'carrot-missing', label: 'Une carotte a disparu du rang du potager.', target: true },
+  { id: 'cloud-sun', label: 'Un nuage cache une partie du soleil.', target: true },
+  { id: 'door-heart', label: 'Le cœur sur la porte de la maison a disparu.', target: true },
+  { id: 'leek-missing', label: 'Il manque un poireau à droite du potager.', target: true },
+  { id: 'butterfly', label: 'Un papillon apparaît près du grand arbre.', target: true },
+  { id: 'pumpkin', label: 'Une salade est remplacée par une citrouille.', target: true },
+  { id: 'mountain', label: 'La montagne a disparu derrière la maison.', target: false },
+  { id: 'dog-gone', label: 'Le petit chien n’est plus dans l’image.', target: false },
+  { id: 'house-color', label: 'La maison est devenue violette.', target: false }
 ]
 
 export const SIMPLE_GAMES = {
