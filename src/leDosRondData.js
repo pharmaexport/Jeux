@@ -56,9 +56,9 @@ export const MEMORY_CARDS = [
 ]
 
 export const SEEK_ITEMS = [
-  { id: 'shovel', icon: '🪴', label: 'la pelle du jardin', target: true },
+  { id: 'shovel', icon: '🪏', label: 'la pelle du jardin', target: true },
   { id: 'carrots', icon: '🥕', label: 'les carottes', target: true },
-  { id: 'leeks', icon: '🧅', label: 'les poireaux', target: true },
+  { id: 'leeks', icon: '🌱', label: 'les poireaux', target: true },
   { id: 'lettuces', icon: '🥬', label: 'les salades', target: true },
   { id: 'cap', icon: '🧢', label: 'la casquette rouge', target: true },
   { id: 'glasses', icon: '👓', label: 'les lunettes du jardinier', target: false },
