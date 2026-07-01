@@ -389,7 +389,7 @@ function SeekMission({ onWin }) {
   const [items] = useState(() => shuffleItems(SEEK_ITEMS))
   const [found, setFound] = useState([])
   const [misses, setMisses] = useState(0)
-  const [feedback, setFeedback] = useState('Trouve les 5 objets importants du reportage. Les bêtises ne comptent pas.')
+  const [feedback, setFeedback] = useState('Trouve les 5 éléments du jardin. Les fausses pistes ne comptent pas.')
   const targetCount = SEEK_ITEMS.filter((item) => item.target).length
   const finished = found.length === targetCount
 
@@ -399,20 +399,20 @@ function SeekMission({ onWin }) {
       const next = [...found, item.id]
       setFound(next)
       if (next.length === targetCount) {
-        setFeedback('Tout est retrouvé : Mamie peut ranger, la grenouille peut téléphoner et le journal peut paraître.')
+        setFeedback('Tout est retrouvé : la pelle, les légumes et la casquette sont dans le carnet du petit chien.')
         onWin('cachecache')
       } else {
         setFeedback(`${item.label} retrouvé. Le petit chien note ça dans son carnet.`)
       }
     } else {
       setMisses((value) => value + 1)
-      setFeedback('Celui-là est drôle, mais ce n’est pas dans la liste. Le lapin fait semblant de ne pas comprendre.')
+      setFeedback('C’est bien dans l’image, mais ce n’est pas dans la liste du jeu.')
     }
   }
 
   return (
-    <MissionFrame image={IMAGES.tonton || IMAGES.montagne} alt="La petite maison de Tonton à la montagne" helper="Cherche les objets du journal : bois, maïs, casque, chocolat chaud et téléphone de grenouille.">
-      <h3>{finished ? 'Tout est trouvé' : 'Cherche et trouve du Sablona'}</h3>
+    <MissionFrame image={IMAGES.tonton || IMAGES.montagne} alt="Le petit chien jardine au potager" helper="Observe bien le jardin et retrouve les objets et légumes cachés dans l’image.">
+      <h3>{finished ? 'Tout est trouvé' : 'Cherche et trouve du jardin'}</h3>
       <p className="game-note hand-frame">Objectifs : {found.length}/{targetCount} — fausses pistes : {misses}</p>
       <div className="seek-grid">
         {items.map((item) => (
@@ -436,7 +436,7 @@ function DifferenceMission({ onWin }) {
   const [choices] = useState(() => shuffleItems(DIFFERENCE_ITEMS))
   const [found, setFound] = useState([])
   const [mistakes, setMistakes] = useState(0)
-  const [feedback, setFeedback] = useState('Compare les deux scènes et clique les vraies différences.')
+  const [feedback, setFeedback] = useState('Compare les deux images et clique les vraies différences.')
   const targetCount = DIFFERENCE_ITEMS.filter((item) => item.target).length
   const finished = found.length === targetCount
 
@@ -446,47 +446,48 @@ function DifferenceMission({ onWin }) {
       const next = [...found, item.id]
       setFound(next)
       if (next.length === targetCount) {
-        setFeedback('Œil de reporter validé : même le rat du maïs est démasqué.')
+        setFeedback('Œil de reporter validé : toutes les différences du jardin sont trouvées.')
         onWin('differences')
       } else {
         setFeedback('Bien vu. Le petit chien souligne la différence dans son journal.')
       }
     } else {
       setMistakes((value) => value + 1)
-      setFeedback('Non, ça c’est une invention du loup pour passer dans le journal.')
+      setFeedback('Non, celle-là n’est pas une vraie différence entre les deux images.')
     }
   }
 
   return (
-    <MissionFrame image={IMAGES.poule} alt="Poule du Sablona" helper="Trouve 5 différences entre deux scènes très sérieuses, donc forcément un peu ridicules.">
-      <h3>{finished ? 'Différences trouvées' : 'Les deux images ne racontent pas tout à fait la même bêtise'}</h3>
-      <div className="difference-scenes">
-        <div className="difference-scene hand-frame">
-          <strong>Image A</strong>
-          <p>🐶🪖 + 🪓 + 🪵 + 👵 + ☕</p>
-          <small>Le petit chien aide, Mamie surveille, personne ne coupe ses oreilles.</small>
-        </div>
-        <div className="difference-scene hand-frame">
-          <strong>Image B</strong>
-          <p>🐶 + ☎️🐸 + 🌽🐀 + 🪵 + ☕</p>
-          <small>La grenouille appelle, le rat grignote, et le casque a disparu.</small>
-        </div>
+    <section className="game-frame story-frame hand-frame">
+      <p className="helper hand-frame">Compare les deux images du jardin, puis retrouve les 7 différences.</p>
+      <div className="difference-image-board">
+        <figure className="difference-image-card hand-frame">
+          <SafeImage src={IMAGES.differencesA} alt="Image A du jardin du petit chien" />
+          <figcaption>Image A</figcaption>
+        </figure>
+        <figure className="difference-image-card hand-frame">
+          <SafeImage src={IMAGES.differencesB} alt="Image B du jardin du petit chien avec différences" />
+          <figcaption>Image B</figcaption>
+        </figure>
       </div>
-      <p className="game-note hand-frame">Différences : {found.length}/{targetCount} — inventions du loup : {mistakes}</p>
-      <div className="answer-grid">
-        {choices.map((item) => (
-          <button
-            key={item.id}
-            className={classNames('difference-choice', found.includes(item.id) && 'found')}
-            type="button"
-            onClick={() => choose(item)}
-          >
-            {found.includes(item.id) ? '✓ ' : ''}{item.label}
-          </button>
-        ))}
+      <div className="mission-box difference-question-box hand-frame">
+        <h3>{finished ? 'Différences trouvées' : 'Qu’est-ce qui a changé ?'}</h3>
+        <p className="game-note hand-frame">Différences : {found.length}/{targetCount} — fausses réponses : {mistakes}</p>
+        <div className="answer-grid">
+          {choices.map((item) => (
+            <button
+              key={item.id}
+              className={classNames('difference-choice', found.includes(item.id) && 'found')}
+              type="button"
+              onClick={() => choose(item)}
+            >
+              {found.includes(item.id) ? '✓ ' : ''}{item.label}
+            </button>
+          ))}
+        </div>
+        <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
       </div>
-      <p className={finished ? 'success-bubble hand-frame' : 'feedback hand-frame'}>{feedback}</p>
-    </MissionFrame>
+    </section>
   )
 }
 
