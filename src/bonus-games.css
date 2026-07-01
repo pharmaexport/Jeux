@@ -9,6 +9,41 @@
   background: #ffe16a;
 }
 
+.arch-title-wrap {
+  display: inline-block;
+  padding-top: 4px;
+}
+
+.arch-title {
+  display: inline-flex !important;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.02em;
+  margin: 0 0 8px !important;
+  min-height: clamp(4.2rem, 14vw, 8.1rem);
+  color: #e73737 !important;
+  font-size: clamp(3rem, 12vw, 6.9rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.06em;
+  text-shadow: 4px 5px 0 #211b16 !important;
+  transform: rotate(-2.5deg) !important;
+}
+
+.arch-title span {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+
+.arch-title span:nth-child(1) { transform: translateY(0.42em) rotate(-25deg); }
+.arch-title span:nth-child(2) { transform: translateY(0.23em) rotate(-18deg); }
+.arch-title span:nth-child(3) { margin-left: 0.16em; transform: translateY(0.08em) rotate(-10deg); }
+.arch-title span:nth-child(4) { transform: translateY(-0.02em) rotate(-4deg); }
+.arch-title span:nth-child(5) { transform: translateY(-0.07em) rotate(0deg); }
+.arch-title span:nth-child(6) { margin-left: 0.16em; transform: translateY(-0.02em) rotate(4deg); }
+.arch-title span:nth-child(7) { transform: translateY(0.08em) rotate(10deg); }
+.arch-title span:nth-child(8) { transform: translateY(0.23em) rotate(18deg); }
+.arch-title span:nth-child(9) { transform: translateY(0.42em) rotate(25deg); }
+
 .memory-grid,
 .seek-grid {
   display: grid;
@@ -117,6 +152,38 @@
   font-weight: 900;
 }
 
+.difference-image-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.difference-image-card {
+  margin: 0;
+  padding: 12px;
+  border: 4px solid #211b16;
+  border-radius: 25px 31px 23px 29px;
+  background: #fffdf4;
+  box-shadow: 5px 6px 0 rgba(33, 27, 22, 0.92);
+}
+
+.difference-image-card .story-image {
+  max-height: 520px;
+  padding: 6px;
+}
+
+.difference-image-card figcaption {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.difference-question-box {
+  margin-top: 6px;
+}
+
 .difference-scenes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -161,11 +228,17 @@
   .home-actions,
   .memory-grid,
   .seek-grid,
-  .difference-scenes {
+  .difference-scenes,
+  .difference-image-board {
     grid-template-columns: 1fr;
   }
 
   .home-actions {
     display: grid;
+  }
+
+  .arch-title {
+    min-height: 4.8rem;
+    font-size: clamp(2.6rem, 15vw, 4.2rem) !important;
   }
 }
