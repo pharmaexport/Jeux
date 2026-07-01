@@ -45,7 +45,17 @@ function App() {
       <header className="site-header hand-frame">
         <div>
           <p className="kicker">Journal officiel du Sablona</p>
-          <h1>Le dos rond</h1>
+          <h1 className="arch-title" aria-label="Le dos rond">
+            <span aria-hidden="true">L</span>
+            <span aria-hidden="true">e</span>
+            <span aria-hidden="true">d</span>
+            <span aria-hidden="true">o</span>
+            <span aria-hidden="true">s</span>
+            <span aria-hidden="true">r</span>
+            <span aria-hidden="true">o</span>
+            <span aria-hidden="true">n</span>
+            <span aria-hidden="true">d</span>
+          </h1>
           <p className="subtitle">Grand reportage du petit chien — une mission par onglet.</p>
         </div>
         <div className="header-mascot" aria-label="Carnet de médailles">
