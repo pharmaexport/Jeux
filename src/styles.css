@@ -237,6 +237,47 @@ h1 {
 }
 .stamp.earned { background: #ffe16a; border-style: solid; }
 
+.seek-card,
+.difference-choice {
+  position: relative;
+  padding-left: 58px !important;
+}
+
+.seek-card::before,
+.difference-choice::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #211b16;
+  border-radius: 8px 10px 7px 9px;
+  background: #fffdf4;
+  box-shadow: 2px 3px 0 #211b16;
+  transform: translateY(-50%) rotate(-3deg);
+}
+
+.seek-card.found::after,
+.difference-choice.found::after {
+  content: '✓';
+  position: absolute;
+  left: 17px;
+  top: calc(50% - 29px);
+  color: #245f1e;
+  font-family: 'Comic Sans MS', 'Trebuchet MS', cursive;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 1px 1px 0 #fffdf4;
+  transform: rotate(-12deg);
+}
+
+.seek-card.found::before,
+.difference-choice.found::before {
+  background: #fff1a8;
+}
+
 @media (max-width: 820px) {
   .site-header,
   .home-grid,
@@ -246,6 +287,25 @@ h1 {
   .site-header { display: grid; }
   .header-mascot { min-width: unset; }
   .paper-panel { padding: 14px; }
+
+  .seek-card,
+  .difference-choice {
+    padding-left: 52px !important;
+  }
+
+  .seek-card::before,
+  .difference-choice::before {
+    left: 13px;
+    width: 29px;
+    height: 29px;
+  }
+
+  .seek-card.found::after,
+  .difference-choice.found::after {
+    left: 14px;
+    top: calc(50% - 26px);
+    font-size: 2.6rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
