@@ -27,10 +27,10 @@ export const MAMMOTH_BADGES = {
 }
 
 export const MAMMOTH_MEMORY = [
-  { id: 'milo', icon: '🦣', label: 'Milo', clue: 'Milo mène l’aventure.' },
-  { id: 'maman', icon: '🦣', label: 'Maman', clue: 'Maman connaît les vents.' },
-  { id: 'papa', icon: '🧭', label: 'Papa', clue: 'Papa répare le ballon.' },
-  { id: 'kiki', icon: '🐒', label: 'Kiki', clue: 'Kiki cherche sa famille.' },
+  { id: 'petit-mammouth', icon: '🦣', label: 'Petit Mammouth', clue: 'Petit Mammouth mène l’aventure.' },
+  { id: 'maman', icon: '🦣', label: 'Maman Mammouth', clue: 'Maman Mammouth connaît les vents.' },
+  { id: 'papa', icon: '🧭', label: 'Papa Mammouth', clue: 'Papa Mammouth répare le ballon.' },
+  { id: 'ouistiti', icon: '🐒', label: 'Ouistiti', clue: 'Ouistiti cherche sa famille.' },
   { id: 'sorcier', icon: '🧙🏾', label: 'Sorcier', clue: 'Le sorcier donne les cartes.' },
   { id: 'tonton', icon: '🦧', label: 'Tonton', clue: 'Tonton connaît la forêt.' }
 ]
@@ -55,18 +55,18 @@ export const CRYSTAL_SEQUENCE = ['petit', 'moyen', 'grand', 'moyen']
 export const STORY_CHAPTERS = {
   vallee: {
     title: 'Le cristal est vide !',
-    text: 'La montgolfière ne vole plus. Milo, ses parents et Kiki partent chercher des cristaux bleus dans les Andes.'
+    text: 'La montgolfière ne vole plus. Petit Mammouth, ses parents et Ouistiti partent chercher des cristaux bleus dans les Andes.'
   },
   sorcier: {
     title: 'Le sorcier des brumes',
-    text: 'Le sorcier donnera deux cartes : une pour les cristaux et une pour retrouver la famille de Kiki.'
+    text: 'Le sorcier donne deux cartes : une pour les cristaux et une pour retrouver la famille de Ouistiti.'
   },
   andes: {
     title: 'La montagne qui chante',
     text: 'Les cristaux suivent un rythme. Il faut prendre seulement les cristaux mûrs et protéger la grotte.'
   },
   afrique: {
-    title: 'La famille de Kiki',
+    title: 'La famille de Ouistiti',
     text: 'En Afrique, les animaux donnent des indices. Tonton orang-outan connaît le chemin du village.'
   }
 }
