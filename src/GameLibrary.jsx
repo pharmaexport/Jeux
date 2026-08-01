@@ -25,8 +25,8 @@ export default function GameLibrary() {
         <article className="library-card mammoth">
           <div className="library-art" aria-hidden="true">🦣🐒💎🎈</div>
           <h2>La Vallée des Mammouths</h2>
-          <p>Trouve les cristaux et la famille de Kiki.</p>
-          <button type="button" onClick={() => setGame('mammouths')}>Jouer avec Milo</button>
+          <p>Trouve les cristaux et la famille de Ouistiti.</p>
+          <button type="button" onClick={() => setGame('mammouths')}>Jouer avec Petit Mammouth</button>
         </article>
       </section>
     </main>
