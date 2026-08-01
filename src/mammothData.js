@@ -1,72 +1,72 @@
 export const MAMMOTH_TABS = [
   { id: 'accueil', label: 'Départ', icon: '🏕️' },
-  { id: 'vallee', label: 'La vallée', icon: '🦣' },
-  { id: 'sorcier', label: 'Le sorcier', icon: '🧙🏾' },
-  { id: 'carte', label: 'Carte sacrée', icon: '🗺️' },
-  { id: 'andes', label: 'Les Andes', icon: '⛰️' },
-  { id: 'cristaux', label: 'Cristaux bleus', icon: '💎' },
-  { id: 'ballon', label: 'Montgolfière', icon: '🎈' },
+  { id: 'vallee', label: 'Vallée', icon: '🦣' },
+  { id: 'sorcier', label: 'Sorcier', icon: '🧙🏾' },
+  { id: 'carte', label: 'Carte', icon: '🗺️' },
+  { id: 'andes', label: 'Andes', icon: '⛰️' },
+  { id: 'cristaux', label: 'Cristaux', icon: '💎' },
+  { id: 'ballon', label: 'Ballon', icon: '🎈' },
   { id: 'afrique', label: 'Afrique', icon: '🌍' },
-  { id: 'animaux', label: 'Les animaux', icon: '🦒' },
-  { id: 'orangoutan', label: 'Tonton orang-outan', icon: '🦧' },
-  { id: 'village', label: 'Village ouistiti', icon: '🐒' },
-  { id: 'carnet', label: 'Carnet final', icon: '🏆' }
+  { id: 'animaux', label: 'Animaux', icon: '🦒' },
+  { id: 'orangoutan', label: 'Tonton', icon: '🦧' },
+  { id: 'village', label: 'Village', icon: '🐒' },
+  { id: 'carnet', label: 'Carnet', icon: '🏆' }
 ]
 
 export const MAMMOTH_BADGES = {
-  vallee: 'Badge de la famille mammouth',
-  sorcier: 'Badge de l’énigme magique',
-  carte: 'Badge du cartographe',
-  andes: 'Badge du passage des Andes',
-  cristaux: 'Badge des cristaux bleus',
-  ballon: 'Badge du pilote de montgolfière',
-  afrique: 'Badge du grand voyage',
-  animaux: 'Badge des amis de la savane',
-  orangoutan: 'Badge du conseil de Tonton',
-  village: 'Badge des mille ouistitis'
+  vallee: 'Famille mammouth',
+  sorcier: 'Mémoire magique',
+  carte: 'Explorateur',
+  andes: 'Andes',
+  cristaux: 'Cristaux bleus',
+  ballon: 'Pilote',
+  afrique: 'Grand voyage',
+  animaux: 'Amis de la savane',
+  orangoutan: 'Conseil de Tonton',
+  village: 'Mille ouistitis'
 }
 
 export const MAMMOTH_MEMORY = [
-  { id: 'milo', icon: '🦣', label: 'Milo', clue: 'Le petit mammouth curieux qui conduit l’aventure.' },
-  { id: 'maman', icon: '👩‍🍼', label: 'Maman Mammouth', clue: 'Elle connaît les vents et garde la famille unie.' },
-  { id: 'papa', icon: '🧭', label: 'Papa Mammouth', clue: 'Il répare la montgolfière et lit les instruments.' },
-  { id: 'kiki', icon: '🐒', label: 'Kiki le ouistiti', clue: 'Rapide, drôle et déterminé à retrouver sa famille.' },
-  { id: 'sorcier', icon: '🧙🏾', label: 'Le sorcier des brumes', clue: 'Il révèle les cartes seulement aux voyageurs attentifs.' },
-  { id: 'tonton', icon: '🦧', label: 'Tonton orang-outan', clue: 'Il connaît les pistes secrètes de la grande forêt.' }
+  { id: 'milo', icon: '🦣', label: 'Milo', clue: 'Milo mène l’aventure.' },
+  { id: 'maman', icon: '🦣', label: 'Maman', clue: 'Maman connaît les vents.' },
+  { id: 'papa', icon: '🧭', label: 'Papa', clue: 'Papa répare le ballon.' },
+  { id: 'kiki', icon: '🐒', label: 'Kiki', clue: 'Kiki cherche sa famille.' },
+  { id: 'sorcier', icon: '🧙🏾', label: 'Sorcier', clue: 'Le sorcier donne les cartes.' },
+  { id: 'tonton', icon: '🦧', label: 'Tonton', clue: 'Tonton connaît la forêt.' }
 ]
 
 export const ANIMAL_CLUES = [
-  { id: 'elephant', icon: '🐘', name: 'Éléphant', question: 'Qui se souvient du passage d’un grand groupe de petits singes ?', answer: 'éléphant' },
-  { id: 'girafe', icon: '🦒', name: 'Girafe', question: 'Qui peut regarder au-dessus des acacias pour repérer de petites cabanes ?', answer: 'girafe' },
-  { id: 'rhino', icon: '🦏', name: 'Rhinocéros', question: 'Qui connaît le sentier solide qui traverse les hautes herbes ?', answer: 'rhinocéros' },
-  { id: 'crocodile', icon: '🐊', name: 'Crocodile grincheux', question: 'Qui garde le gué et demande une énigme avant de laisser passer ?', answer: 'crocodile' }
+  { id: 'elephant', icon: '🐘', name: 'Éléphant', question: 'Qui se souvient des ouistitis ?', answer: 'éléphant' },
+  { id: 'girafe', icon: '🦒', name: 'Girafe', question: 'Qui voit au-dessus des arbres ?', answer: 'girafe' },
+  { id: 'rhino', icon: '🦏', name: 'Rhinocéros', question: 'Qui connaît le sentier solide ?', answer: 'rhinocéros' },
+  { id: 'crocodile', icon: '🐊', name: 'Crocodile', question: 'Qui garde le passage de la rivière ?', answer: 'crocodile' }
 ]
 
 export const ROUTE_STEPS = [
-  { id: 'vallee', label: 'Vallée des Mammouths', icon: '🏕️' },
+  { id: 'vallee', label: 'Vallée', icon: '🏕️' },
   { id: 'ocean', label: 'Océan', icon: '🌊' },
-  { id: 'andes', label: 'Montagne sacrée des Andes', icon: '⛰️' },
-  { id: 'savane', label: 'Savane africaine', icon: '🌾' },
-  { id: 'foret', label: 'Forêt des ouistitis', icon: '🌳' }
+  { id: 'andes', label: 'Andes', icon: '⛰️' },
+  { id: 'savane', label: 'Savane', icon: '🌾' },
+  { id: 'foret', label: 'Forêt', icon: '🌳' }
 ]
 
 export const CRYSTAL_SEQUENCE = ['petit', 'moyen', 'grand', 'moyen']
 
 export const STORY_CHAPTERS = {
   vallee: {
-    title: 'Le souffle bleu s’éteint',
-    text: 'Dans la Vallée des Mammouths, Milo vit avec ses deux parents dans une maison ronde, juste à côté de leur montgolfière familiale. Un matin, le brûleur tousse : le dernier cristal d’hélium bleu a perdu sa lumière. Sans nouveaux cristaux, plus aucun grand voyage n’est possible. Kiki, le meilleur ami ouistiti de Milo, propose de partir chercher la montagne sacrée d’Amérique du Sud où les cristaux naissent dans la roche.'
+    title: 'Le cristal est vide !',
+    text: 'La montgolfière ne vole plus. Milo, ses parents et Kiki partent chercher des cristaux bleus dans les Andes.'
   },
   sorcier: {
-    title: 'La tente du sorcier des brumes',
-    text: 'Le sorcier n’offre jamais une carte entière. Il remet trois fragments aux enfants capables d’observer, de mémoriser et de raisonner. Sa première carte indique la montagne sacrée. Une seconde carte, cachée derrière un symbole de lune, indique un ancien chemin vers l’Afrique et le village perdu des ouistitis.'
+    title: 'Le sorcier des brumes',
+    text: 'Le sorcier donnera deux cartes : une pour les cristaux et une pour retrouver la famille de Kiki.'
   },
   andes: {
     title: 'La montagne qui chante',
-    text: 'Au-dessus des nuages, les parois des Andes résonnent comme un xylophone. Les cristaux bleus ne doivent pas être arrachés au hasard : il faut suivre le rythme de la montagne et ne prendre que les cristaux arrivés à maturité. Chaque cristal alimente un voyage, mais la famille doit aussi protéger la grotte pour les générations futures.'
+    text: 'Les cristaux suivent un rythme. Il faut prendre seulement les cristaux mûrs et protéger la grotte.'
   },
   afrique: {
-    title: 'La piste des mille voix',
-    text: 'Une fois la montgolfière réparée, Kiki avoue qu’il rêve de retrouver sa famille. La carte du sorcier conduit la troupe jusqu’en Afrique. Éléphants, girafes et rhinocéros offrent chacun une partie de l’itinéraire. Un crocodile grincheux bloque le gué, avant que Tonton orang-outan n’explique comment atteindre le village caché où vivent des milliers de ouistitis.'
+    title: 'La famille de Kiki',
+    text: 'En Afrique, les animaux donnent des indices. Tonton orang-outan connaît le chemin du village.'
   }
 }
