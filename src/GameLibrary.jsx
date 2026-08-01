@@ -11,22 +11,22 @@ export default function GameLibrary() {
   return (
     <main className="game-library">
       <header className="library-hero">
-        <p>La bibliothèque des aventures</p>
+        <p>Deux aventures</p>
         <h1>Choisis ton jeu</h1>
-        <p>Deux grandes histoires, des missions, des jeux de mémoire et des récompenses à collectionner.</p>
+        <p>Joue, réussis les missions et gagne des médailles.</p>
       </header>
       <section className="library-grid">
         <article className="library-card dos">
           <div className="library-art" aria-hidden="true">🐶🗞️🌻</div>
           <h2>Le dos rond</h2>
-          <p>Retrouve le petit chien reporter, la ferme, le potager, la mare, la montagne, le port et les jeux bonus.</p>
+          <p>Aide le petit chien reporter.</p>
           <button type="button" onClick={() => setGame('dos-rond')}>Jouer au Dos rond</button>
         </article>
         <article className="library-card mammoth">
           <div className="library-art" aria-hidden="true">🦣🐒💎🎈</div>
           <h2>La Vallée des Mammouths</h2>
-          <p>Aide Milo, ses parents et Kiki à trouver les cristaux bleus d’hélium, puis le village africain des mille ouistitis.</p>
-          <button type="button" onClick={() => setGame('mammouths')}>Partir avec les mammouths</button>
+          <p>Trouve les cristaux et la famille de Kiki.</p>
+          <button type="button" onClick={() => setGame('mammouths')}>Jouer avec Milo</button>
         </article>
       </section>
     </main>
