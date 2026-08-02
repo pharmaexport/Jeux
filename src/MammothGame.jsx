@@ -90,7 +90,7 @@ function StoryQuiz({ chapter, id, onWin }) {
   const data = STORY_CHAPTERS[chapter]
   const questions = chapter === 'vallee' ? [
     ['Pourquoi chercher les cristaux ?', 'Pour la montgolfière', ['Pour la montgolfière', 'Pour la maison', 'Pour manger']],
-    ['Où sont-ils ?', 'Dans les Andes', ['Dans les Andes', 'Dans la vallée', 'Sur la Lune']],
+    ['Où sont-ils ?', 'Dans la montagne sacrée', ['Dans la montagne sacrée', 'Dans la Vallée des Mammouths', 'Sur la Lune']],
     ['Qui part ?', 'La famille et Ouistiti', ['La famille et Ouistiti', 'Le crocodile', 'Personne']]
   ] : chapter === 'andes' ? [
     ['Comment les choisir ?', 'Suivre le rythme', ['Suivre le rythme', 'Tout prendre', 'Crier']],
@@ -198,5 +198,5 @@ function VillageGame({ onWin }) {
 
 function FinalBook({ badges }) {
   const complete = badges.length === Object.keys(MAMMOTH_BADGES).length
-  return <section className="mammoth-card final-book"><div className="final-scene">🦣🦣🦣 🐒 🎈 💎 🌍 🐒🐒🐒</div><h3>{complete ? 'La grande fête' : 'Carnet incomplet'}</h3><p>{complete ? 'La montgolfière vole. Ouistiti retrouve sa famille. Petit Mammouth et ses parents participent à la fête.' : `${badges.length} badges sur ${Object.keys(MAMMOTH_BADGES).length}.`}</p><BadgeBook badges={badges} /></section>
+  return <section className="mammoth-card final-book"><div className="final-scene">🦣🦣🦣 🐒 🎈 💎 🌍 🐒🐒🐒</div><h3>{complete ? 'La grande fête !' : 'Encore quelques missions'}</h3><p>{complete ? 'La montgolfière vole. Ouistiti retrouve sa famille. Tout le village fait la fête !' : `${badges.length} badges sur ${Object.keys(MAMMOTH_BADGES).length}.`}</p><BadgeBook badges={badges} /></section>
 }
