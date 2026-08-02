@@ -3,7 +3,7 @@ export const MAMMOTH_TABS = [
   { id: 'vallee', label: 'Vallée', icon: '🦣' },
   { id: 'sorcier', label: 'Sorcier', icon: '🧙🏾' },
   { id: 'carte', label: 'Carte', icon: '🗺️' },
-  { id: 'andes', label: 'Andes', icon: '⛰️' },
+  { id: 'andes', label: 'Montagne sacrée', icon: '⛰️' },
   { id: 'cristaux', label: 'Cristaux', icon: '💎' },
   { id: 'ballon', label: 'Ballon', icon: '🎈' },
   { id: 'afrique', label: 'Afrique', icon: '🌍' },
@@ -17,7 +17,7 @@ export const MAMMOTH_BADGES = {
   vallee: 'Famille mammouth',
   sorcier: 'Mémoire magique',
   carte: 'Explorateur',
-  andes: 'Andes',
+  andes: 'Montagne sacrée',
   cristaux: 'Cristaux bleus',
   ballon: 'Pilote',
   afrique: 'Grand voyage',
@@ -45,7 +45,7 @@ export const ANIMAL_CLUES = [
 export const ROUTE_STEPS = [
   { id: 'vallee', label: 'Vallée', icon: '🏕️' },
   { id: 'ocean', label: 'Océan', icon: '🌊' },
-  { id: 'andes', label: 'Andes', icon: '⛰️' },
+  { id: 'andes', label: 'Montagne sacrée', icon: '⛰️' },
   { id: 'savane', label: 'Savane', icon: '🌾' },
   { id: 'foret', label: 'Forêt', icon: '🌳' }
 ]
@@ -55,14 +55,14 @@ export const CRYSTAL_SEQUENCE = ['petit', 'moyen', 'grand', 'moyen']
 export const STORY_CHAPTERS = {
   vallee: {
     title: 'Le cristal est vide !',
-    text: 'La montgolfière ne vole plus. Petit Mammouth, ses parents et Ouistiti partent chercher des cristaux bleus dans les Andes.'
+    text: 'La montgolfière ne vole plus. Petit Mammouth, ses parents et Ouistiti partent chercher des cristaux bleus dans la montagne sacrée.'
   },
   sorcier: {
     title: 'Le sorcier des brumes',
     text: 'Le sorcier donne deux cartes : une pour les cristaux et une pour retrouver la famille de Ouistiti.'
   },
   andes: {
-    title: 'La montagne qui chante',
+    title: 'La montagne sacrée',
     text: 'Les cristaux suivent un rythme. Il faut prendre seulement les cristaux mûrs et protéger la grotte.'
   },
   afrique: {
