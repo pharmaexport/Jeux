@@ -1,6 +1,6 @@
 export const MAMMOTH_TABS = [
   { id: 'accueil', label: 'Départ', icon: '🏕️' },
-  { id: 'vallee', label: 'Vallée', icon: '🦣' },
+  { id: 'vallee', label: 'Vallée des Mammouths', icon: '🦣' },
   { id: 'sorcier', label: 'Sorcier', icon: '🧙🏾' },
   { id: 'carte', label: 'Carte', icon: '🗺️' },
   { id: 'andes', label: 'Montagne sacrée', icon: '⛰️' },
@@ -14,7 +14,7 @@ export const MAMMOTH_TABS = [
 ]
 
 export const MAMMOTH_BADGES = {
-  vallee: 'Famille mammouth',
+  vallee: 'Vallée des Mammouths',
   sorcier: 'Mémoire magique',
   carte: 'Explorateur',
   andes: 'Montagne sacrée',
@@ -43,7 +43,7 @@ export const ANIMAL_CLUES = [
 ]
 
 export const ROUTE_STEPS = [
-  { id: 'vallee', label: 'Vallée', icon: '🏕️' },
+  { id: 'vallee', label: 'Vallée des Mammouths', icon: '🏕️' },
   { id: 'ocean', label: 'Océan', icon: '🌊' },
   { id: 'andes', label: 'Montagne sacrée', icon: '⛰️' },
   { id: 'savane', label: 'Savane', icon: '🌾' },
