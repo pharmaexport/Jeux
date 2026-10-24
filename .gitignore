@@ -7,3 +7,27 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Security additions
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.p12
+*.pfx
+*.key
+*.keystore
+*.credentials.json
+*-service-account.json
+service-account*.json
+credentials/
+secrets/
+.next/
+build/
+__pycache__/
+.venv/
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.log
